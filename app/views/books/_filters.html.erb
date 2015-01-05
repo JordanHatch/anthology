@@ -1,16 +1,40 @@
-<ul class="filters">
-  <li class="filter">
-    <h3>availability</h3>
-    <ul>
-      <li><%= filter_link "available", :availability, "available" %></li>
-      <li><%= filter_link "on loan", :availability, "on_loan" %></li>
-      <li><%= filter_link "missing", :availability, "missing" %></li>
-    </ul>
-  </li>
-  <li class="filter search-filter">
-    <%= form_tag "", :method => :get do %>
+<%= form_tag "", :method => :get do %>
+<aside class="filters">
+  <ul>
+    <li class="filter search-filter">
+      <h3>Book title</h3>
       <%= text_field_tag :q, params[:q], :placeholder => "Search titles.." %>
-      <%= button_tag "Search", name: nil %>
-    <% end %>
-  </li>
-</ul>
+    </li>
+    <li class="filter">
+      <h3>Availability</h3>
+      <%= select_tag :availability,
+                      options_for_select(
+                        [
+                          ['Available', 'available'],
+                          ['On loan', 'on_loan'],
+                          ['Missing copies', 'missing']
+                        ],
+                        params[:availability]
+                      ),
+                      include_blank: true %>
+    </li>
+    <li class="filter select-filter">
+      <h3>Currently on loan to</h3>
+      <%= select_tag :on_loan_to,
+                      options_from_collection_for_select(users, 'id', 'name', params[:on_loan_to]),
+                      include_blank: true %>
+    </li>
+    <li class="filter select-filter">
+      <h3>Once loaned to</h3>
+      <%= select_tag :once_on_loan_to,
+                      options_from_collection_for_select(users, 'id', 'name', params[:once_on_loan_to]),
+      include_blank: true %>
+    </li>
+  </ul>
+  <%= button_tag "Filter results", name: nil %>
+
+  <% if filters_applied? %>
+    <%= link_to "Clear filters", books_path, class: 'button warning' %>
+  <% end %>
+</aside>
+<% end %>

@@ -12,6 +12,21 @@
  *= require_self
  */
 
+@import 'reset';
+@import 'layout';
+
+@import 'elements/books';
+@import 'elements/filters';
+@import 'elements/forms';
+@import 'elements/typography';
+
+@import 'views/books-list';
+
+
+/*
+Old stylesheets:
+----------------
+
 @import 'core';
 @import 'buttons';
 
@@ -21,3 +36,4 @@
 
 @import 'copies';
 @import 'start';
+*/

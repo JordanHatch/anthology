@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   validates :provider_uid, :presence => true, :uniqueness => true
   validate :email_has_permitted_hostname, on: :create
 
+  scope :in_name_order, -> { order('name ASC') }
+
   class CreationFailure < StandardError; end
 
   def current_copies

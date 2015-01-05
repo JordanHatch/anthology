@@ -1,0 +1,26 @@
+.filterable-list {
+  overflow: auto;
+
+  .filters {
+    float: left;
+    width: 30%;
+  }
+
+  .results {
+    float: right;
+    width: 70%;
+  }
+}
+
+.results-count {
+  border-bottom: 1px solid #ddd;
+  padding: 0 0 11px;
+  margin-bottom: 11px;
+  line-height: 1;
+  font-size: 19px;
+
+  span {
+    font-size: 40px;
+    padding-right: 4px;
+  }
+}

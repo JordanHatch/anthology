@@ -2,6 +2,7 @@
   <%= render :partial => "filters" %>
 
   <div class="results">
-    <%= render :partial => "book_grid", :locals => { :books => @books } %>
+    <%= render partial: 'results_count', locals: { results: @books } %>
+    <%= render partial: 'results', locals: { books: @books } %>
   </div>
 </div>

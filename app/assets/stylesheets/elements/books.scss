@@ -1,0 +1,37 @@
+.book-item {
+  a {
+    background: #f3f3f3;
+    display: block;
+    overflow: auto;
+    text-decoration: none;
+
+    &:hover {
+      background: #e3e3e3;
+    }
+  }
+
+  .cover {
+    background: #ddd;
+    float: left;
+    width: 90px;
+    margin-right: 13px;
+    min-height: 100px;
+    border: none;
+  }
+
+  .metadata {
+    // float: left;
+  }
+
+  h1 {
+    font-size: 18px;
+    padding: 7px 0;
+  }
+  .author {
+    font-size: 15px;
+  }
+}
+
+.books-list .book-item {
+  margin: 8px 0;
+}

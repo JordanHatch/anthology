@@ -1,25 +1,21 @@
 module BooksHelper
   def book_cover_tag(book, options = { })
-    size = options[:size] || "S"
-    zoom = cover_sizes[size]
+    attributes = {
+      class: 'cover',
+      alt: "Cover image of '#{book.title}'",
+    }.merge(options[:html] || {})
 
-    if book.google_id
-      image_tag "http://bks0.books.google.co.uk/books?id=#{book.google_id}&printsec=frontcover&img=1&zoom=#{zoom}&edge=none&source=gbs_api", :alt => "#{book.title} by #{book.author}"
-    else
-      content_tag :div, :class => "placeholder_book" do
-        concat(book.title)
-        concat(content_tag :span, book.author, :rel => "author")
-      end
-    end
+    image_tag cover_url_for(book, options.fetch(:size, "S")), attributes
   end
 
-  def cover_urls(book, size = "S")
-    response = { }
-
-    response[:google] = "http://bks0.books.google.co.uk/books?id=#{book[:google_id]}&printsec=frontcover&img=1&zoom=#{cover_sizes[size]}&edge=none&source=gbs_api" if book[:google_id]
-    response[:openlibrary] = "http://covers.openlibrary.org/b/olid/#{book[:openlibrary_id]}-M.jpg" if book[:openlibrary_id]
-
-    response
+  def cover_url_for(book, size = "S")
+    if book.google_id.present?
+      "http://bks0.books.google.co.uk/books?id=#{book.google_id}&printsec=frontcover&img=1&zoom=#{cover_sizes[size]}&edge=none&source=gbs_api"
+    elsif book.openlibrary_id.present?
+      "http://covers.openlibrary.org/b/olid/#{book.openlibrary_id}-M.jpg"
+    else
+      ""
+    end
   end
 
   def cover_sizes

@@ -1,0 +1,58 @@
+.input {
+  @extend .font-stack;
+
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 0px;
+  padding: 4px 8px;
+  font-size: 16px;
+}
+.button {
+  @extend .font-stack;
+
+  border: 1px solid #666;
+  border-bottom-width: 3px;
+  background: #fff;
+  color: #000;
+  font-size: 16px;
+  padding: 5px 9px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  line-height: 1.4;
+  vertical-align: middle;
+
+  &:hover {
+    background: #f8f8f8;
+    border-color: #444;
+  }
+  &:active {
+    margin-top: 2px;
+    border-bottom-width: 1px;
+  }
+
+  &.warning {
+    border-color: #c62929;
+    color: #c62929;
+  }
+}
+
+input[type=text] {
+  @extend .input;
+}
+
+button {
+  @extend .button;
+}
+
+select {
+  @extend .input;
+  -webkit-appearance: none;
+
+  background: #fff image-url('select-arrow.png') no-repeat 95% center;
+  background-size: 8px 6px;
+}
+
+option {
+  font-size: 13px;
+}

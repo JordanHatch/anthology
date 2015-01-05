@@ -18,6 +18,8 @@ class Book < ActiveRecord::Base
   scope :available, -> { joins(:copies).where(copies: { on_loan: false }) }
   scope :on_loan, -> { joins(:copies).where(copies: { on_loan: true }) }
   scope :missing, -> { joins(:copies).where(copies: { missing: true }) }
+  scope :on_loan_to_user, proc {|user_id| joins(:loans).where(loans: {user_id: user_id, state: 'on_loan'}) }
+  scope :once_on_loan_to_user, proc {|user_id| joins(:loans).where(loans: {user_id: user_id}) }
 
   default_scope -> { order("title ASC") }
 

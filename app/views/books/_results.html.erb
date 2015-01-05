@@ -1,0 +1,13 @@
+<ul class="books-list">
+  <% books.each do |book| %>
+    <li class="book-item">
+      <%= link_to book_path(book) do %>
+        <%= book_cover_tag(book) %>
+        <div class="metadata">
+          <h1><%= book.title %></h1>
+          <p class="author"><%= book.author %></p>
+        </div>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

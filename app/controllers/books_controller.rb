@@ -4,6 +4,9 @@ class BooksController < ApplicationController
   before_filter :lookup_book, :only => [:show, :edit, :history, :update]
 
   has_scope :title_search, :as => :q
+  has_scope :on_loan_to_user, as: :on_loan_to
+  has_scope :once_on_loan_to_user, as: :once_on_loan_to
+
   has_scope :availability do |controller, scope, value|
     case value
     when "available" then scope.available
@@ -62,6 +65,17 @@ class BooksController < ApplicationController
   end
 
 private
+  def users
+    User.in_name_order
+  end
+  helper_method :users
+
+  def filters_applied?
+    # current_scopes method provided by the has_scope gem
+    current_scopes.any?
+  end
+  helper_method :filters_applied?
+
   def lookup_book
     @book = Book.includes(:copies).find(params[:id]) || not_found
   end
